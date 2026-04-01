@@ -330,10 +330,14 @@
       pointer-events: none;
     }
 
-    .card-img span.emoji {
-      font-size: 3rem;
-      opacity: 0.85;
+    .card-img .card-thumb {
+      width: 5.5rem;
+      height: auto;
+      max-height: 4.25rem;
+      object-fit: contain;
+      opacity: 0.92;
       z-index: 1;
+      position: relative;
     }
 
     .tag {
@@ -442,10 +446,12 @@
       padding: 0.5rem;
     }
 
-    .feature-item .icon {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
+    .feature-item .feature-icon {
+      width: 2rem;
+      height: 2rem;
+      margin: 0 auto 0.5rem;
       display: block;
+      opacity: 0.95;
     }
 
     .feature-item strong {
@@ -582,7 +588,7 @@
         <article class="card" role="listitem">
           <div class="card-img">
             <span class="tag">新品</span>
-            <span class="emoji" aria-hidden="true">📱</span>
+            <img class="card-thumb" src="assets/img/phone.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>5G 智能手机 Pro</h3>
@@ -596,7 +602,7 @@
         <article class="card" role="listitem">
           <div class="card-img">
             <span class="tag hot">热卖</span>
-            <span class="emoji" aria-hidden="true">🎧</span>
+            <img class="card-thumb" src="assets/img/headphones.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>降噪无线耳机</h3>
@@ -609,7 +615,7 @@
         </article>
         <article class="card" role="listitem">
           <div class="card-img">
-            <span class="emoji" aria-hidden="true">⌚</span>
+            <img class="card-thumb" src="assets/img/watch.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>运动智能手表</h3>
@@ -623,7 +629,7 @@
         <article class="card" role="listitem">
           <div class="card-img">
             <span class="tag">限时</span>
-            <span class="emoji" aria-hidden="true">💻</span>
+            <img class="card-thumb" src="assets/img/laptop.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>轻薄笔记本电脑</h3>
@@ -636,7 +642,7 @@
         </article>
         <article class="card" role="listitem">
           <div class="card-img">
-            <span class="emoji" aria-hidden="true">📷</span>
+            <img class="card-thumb" src="assets/img/camera.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>便携数码相机</h3>
@@ -650,7 +656,7 @@
         <article class="card" role="listitem">
           <div class="card-img">
             <span class="tag hot">套装</span>
-            <span class="emoji" aria-hidden="true">🔌</span>
+            <img class="card-thumb" src="assets/img/charger.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>快充充电套装</h3>
@@ -666,22 +672,22 @@
 
     <div class="feature-strip" id="section-services" role="region" aria-label="服务说明">
       <div class="feature-item">
-        <span class="icon" aria-hidden="true">🚚</span>
+        <img class="feature-icon" src="assets/img/feature-ship.svg" alt="" width="32" height="32" loading="lazy" />
         <strong>满额包邮</strong>
         <span>测试用说明文案，无真实物流。</span>
       </div>
       <div class="feature-item">
-        <span class="icon" aria-hidden="true">🔒</span>
+        <img class="feature-icon" src="assets/img/feature-secure.svg" alt="" width="32" height="32" loading="lazy" />
         <strong>安全支付</strong>
         <span>静态页不采集任何支付信息。</span>
       </div>
       <div class="feature-item">
-        <span class="icon" aria-hidden="true">↩️</span>
+        <img class="feature-icon" src="assets/img/feature-return.svg" alt="" width="32" height="32" loading="lazy" />
         <strong>退换示意</strong>
         <span>用于拉长页面高度与视觉分区。</span>
       </div>
       <div class="feature-item">
-        <span class="icon" aria-hidden="true">💬</span>
+        <img class="feature-icon" src="assets/img/feature-chat.svg" alt="" width="32" height="32" loading="lazy" />
         <strong>客服占位</strong>
         <span>可替换为真实热线或在线入口。</span>
       </div>
@@ -695,7 +701,7 @@
       <div class="grid" role="list">
         <article class="card" role="listitem">
           <div class="card-img">
-            <span class="emoji" aria-hidden="true">🖥️</span>
+            <img class="card-thumb" src="assets/img/monitor.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>27 寸 4K 显示器</h3>
@@ -709,7 +715,7 @@
         <article class="card" role="listitem">
           <div class="card-img">
             <span class="tag">新品</span>
-            <span class="emoji" aria-hidden="true">🎮</span>
+            <img class="card-thumb" src="assets/img/gamepad.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>无线游戏手柄</h3>
@@ -722,7 +728,7 @@
         </article>
         <article class="card" role="listitem">
           <div class="card-img">
-            <span class="emoji" aria-hidden="true">⌨️</span>
+            <img class="card-thumb" src="assets/img/keyboard.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>机械键盘 87 键</h3>
@@ -736,7 +742,7 @@
         <article class="card" role="listitem">
           <div class="card-img">
             <span class="tag hot">推荐</span>
-            <span class="emoji" aria-hidden="true">🖱️</span>
+            <img class="card-thumb" src="assets/img/mouse.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>人体工学鼠标</h3>
@@ -749,7 +755,7 @@
         </article>
         <article class="card" role="listitem">
           <div class="card-img">
-            <span class="emoji" aria-hidden="true">🛋️</span>
+            <img class="card-thumb" src="assets/img/lamp.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>智能氛围台灯</h3>
@@ -762,7 +768,7 @@
         </article>
         <article class="card" role="listitem">
           <div class="card-img">
-            <span class="emoji" aria-hidden="true">🎒</span>
+            <img class="card-thumb" src="assets/img/backpack.svg" alt="" width="96" height="72" loading="lazy" />
           </div>
           <div class="card-body">
             <h3>城市通勤双肩包</h3>
@@ -811,13 +817,10 @@
       </div>
       <p>本地打开本文件即可预览 · 商品与价格均为虚构</p>
       <p style="margin-top:0.75rem;max-width:48rem;margin-left:auto;margin-right:auto;">
-        © 测试页 · 文件夹：<code style="color:var(--muted);font-size:0.9em;">fangshi-stuff/product-gallery-test/</code>
+        © 测试页 · 资源目录：<code style="color:var(--muted);font-size:0.9em;">assets/img/</code> 与 <code style="color:var(--muted);font-size:0.9em;">assets/js/</code>
       </p>
     </footer>
   </div>
-  <script>
-    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
-  </script>
-  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
 </body>
 </html>
