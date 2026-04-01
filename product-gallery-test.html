@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>商品陈列 · 测试页</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a222c;
+      --surface-hover: #232d3a;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e8ecf1;
+      --muted: #8b9aab;
+      --accent: #3d9cf0;
+      --accent-soft: rgba(61, 156, 240, 0.15);
+      --success: #34d399;
+      --radius: 14px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(61, 156, 240, 0.18), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(52, 211, 153, 0.06), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 80%, rgba(139, 92, 246, 0.08), transparent);
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem 0 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 5vw, 2.65rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.65rem;
+      line-height: 1.15;
+    }
+
+    .hero .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 42ch;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-ghost {
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.6rem 1.15rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(61, 156, 240, 0.4);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    a.btn-ghost {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(61, 156, 240, 0.25);
+    }
+
+    .section {
+      margin-top: 3.5rem;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 32rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .chip {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .chip.active {
+      color: var(--accent);
+      border-color: rgba(61, 156, 240, 0.35);
+      background: var(--accent-soft);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(61, 156, 240, 0.35);
+      background: var(--surface-hover);
+    }
+
+    .card-img {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #2a3544 0%, #1e2835 50%, #243040 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.35));
+      pointer-events: none;
+    }
+
+    .card-img span.emoji {
+      font-size: 3rem;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    .tag {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 2;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(15, 20, 25, 0.75);
+      backdrop-filter: blur(8px);
+      color: var(--success);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .tag.hot {
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+
+    .card-body {
+      padding: 1.25rem 1.25rem 1.35rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .price small {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-left: 0.35rem;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: var(--accent);
+      color: #0a0e12;
+      transition: filter 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:hover {
+      filter: brightness(1.08);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    a.btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3.5rem;
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .feature-item .icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .feature-item strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-item span {
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    .faq {
+      margin-top: 3.5rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .faq-item dt {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .faq-item dd {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .note-block {
+      margin-top: 3rem;
+      padding: 1.5rem 1.25rem;
+      border-radius: var(--radius);
+      border: 1px dashed rgba(139, 154, 171, 0.35);
+      background: rgba(26, 34, 44, 0.6);
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.65;
+    }
+
+    .note-block p + p {
+      margin-top: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8125rem;
+    }
+
+    footer .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="hero">
+      <h1>精选陈列</h1>
+      <p class="lead">静态测试页 · 无后端 · 用于滚动与多区块布局验证</p>
+      <div class="hero-cta">
+        <a class="btn" href="#section-hot">浏览热卖</a>
+        <a class="btn-ghost" href="#section-more">更多品类</a>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Demo</span>
+        <span class="badge">Responsive</span>
+        <span class="badge">Scroll</span>
+      </div>
+    </header>
+
+    <section class="section" id="section-hot" aria-labelledby="heading-hot">
+      <div class="section-head">
+        <h2 id="heading-hot">本周推荐</h2>
+        <p>首屏下方的第一组商品栅格，用于测试分段标题与间距。</p>
+      </div>
+      <div class="chips" role="list">
+        <span class="chip active" role="listitem">全部</span>
+        <span class="chip" role="listitem">数码</span>
+        <span class="chip" role="listitem">音频</span>
+        <span class="chip" role="listitem">穿戴</span>
+        <span class="chip" role="listitem">配件</span>
+      </div>
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="tag">新品</span>
+            <span class="emoji" aria-hidden="true">📱</span>
+          </div>
+          <div class="card-body">
+            <h3>5G 智能手机 Pro</h3>
+            <p class="desc">高刷屏、长续航，适合日常与办公。测试用占位文案。</p>
+            <div class="row">
+              <div class="price">¥3,999<small>¥4,299</small></div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="tag hot">热卖</span>
+            <span class="emoji" aria-hidden="true">🎧</span>
+          </div>
+          <div class="card-body">
+            <h3>降噪无线耳机</h3>
+            <p class="desc">通勤与远程会议场景。卡片悬停有轻微上浮效果。</p>
+            <div class="row">
+              <div class="price">¥899</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="emoji" aria-hidden="true">⌚</span>
+          </div>
+          <div class="card-body">
+            <h3>运动智能手表</h3>
+            <p class="desc">心率、睡眠与运动记录。栅格随窗口宽度自动换行。</p>
+            <div class="row">
+              <div class="price">¥1,299<small>¥1,499</small></div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="tag">限时</span>
+            <span class="emoji" aria-hidden="true">💻</span>
+          </div>
+          <div class="card-body">
+            <h3>轻薄笔记本电脑</h3>
+            <p class="desc">开发与文档场景示意。按钮仅为视觉，无实际提交。</p>
+            <div class="row">
+              <div class="price">¥6,499</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="emoji" aria-hidden="true">📷</span>
+          </div>
+          <div class="card-body">
+            <h3>便携数码相机</h3>
+            <p class="desc">旅行与 vlog 占位描述，用于测试多行摘要截断。</p>
+            <div class="row">
+              <div class="price">¥4,580</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="tag hot">套装</span>
+            <span class="emoji" aria-hidden="true">🔌</span>
+          </div>
+          <div class="card-body">
+            <h3>快充充电套装</h3>
+            <p class="desc">多口 GaN 充电器 + 线缆组合示意。</p>
+            <div class="row">
+              <div class="price">¥199<small>¥259</small></div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="feature-strip" role="region" aria-label="服务说明">
+      <div class="feature-item">
+        <span class="icon" aria-hidden="true">🚚</span>
+        <strong>满额包邮</strong>
+        <span>测试用说明文案，无真实物流。</span>
+      </div>
+      <div class="feature-item">
+        <span class="icon" aria-hidden="true">🔒</span>
+        <strong>安全支付</strong>
+        <span>静态页不采集任何支付信息。</span>
+      </div>
+      <div class="feature-item">
+        <span class="icon" aria-hidden="true">↩️</span>
+        <strong>退换示意</strong>
+        <span>用于拉长页面高度与视觉分区。</span>
+      </div>
+      <div class="feature-item">
+        <span class="icon" aria-hidden="true">💬</span>
+        <strong>客服占位</strong>
+        <span>可替换为真实热线或在线入口。</span>
+      </div>
+    </div>
+
+    <section class="section" id="section-more" aria-labelledby="heading-more">
+      <div class="section-head">
+        <h2 id="heading-more">更多精选</h2>
+        <p>第二组商品列表，确保在常见笔记本分辨率下需要纵向滚动才能看完。</p>
+      </div>
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="emoji" aria-hidden="true">🖥️</span>
+          </div>
+          <div class="card-body">
+            <h3>27 寸 4K 显示器</h3>
+            <p class="desc">色彩校准、低蓝光模式示意，适合设计与长时间阅读。</p>
+            <div class="row">
+              <div class="price">¥2,699</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="tag">新品</span>
+            <span class="emoji" aria-hidden="true">🎮</span>
+          </div>
+          <div class="card-body">
+            <h3>无线游戏手柄</h3>
+            <p class="desc">低延迟、多平台兼容占位描述。</p>
+            <div class="row">
+              <div class="price">¥459<small>¥529</small></div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="emoji" aria-hidden="true">⌨️</span>
+          </div>
+          <div class="card-body">
+            <h3>机械键盘 87 键</h3>
+            <p class="desc">热插拔轴体、RGB 背光示意文案。</p>
+            <div class="row">
+              <div class="price">¥599</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="tag hot">推荐</span>
+            <span class="emoji" aria-hidden="true">🖱️</span>
+          </div>
+          <div class="card-body">
+            <h3>人体工学鼠标</h3>
+            <p class="desc">侧键可编程、多设备切换示意。</p>
+            <div class="row">
+              <div class="price">¥329</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="emoji" aria-hidden="true">🛋️</span>
+          </div>
+          <div class="card-body">
+            <h3>智能氛围台灯</h3>
+            <p class="desc">色温调节、定时关闭占位说明。</p>
+            <div class="row">
+              <div class="price">¥249</div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" role="listitem">
+          <div class="card-img">
+            <span class="emoji" aria-hidden="true">🎒</span>
+          </div>
+          <div class="card-body">
+            <h3>城市通勤双肩包</h3>
+            <p class="desc">笔记本隔层、防水面料示意文案。</p>
+            <div class="row">
+              <div class="price">¥399<small>¥499</small></div>
+              <button type="button" class="btn">加入清单</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="faq" aria-labelledby="heading-faq">
+      <h2 id="heading-faq">常见问题（占位）</h2>
+      <dl>
+        <div class="faq-item">
+          <dt>这是真实商城吗？</dt>
+          <dd>否。本页为本地静态 HTML，所有商品与价格均为虚构，用于界面与滚动测试。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>「加入清单」会提交数据吗？</dt>
+          <dd>不会。按钮无后端接口，不写入本地存储。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>顶部分类标签可点吗？</dt>
+          <dd>当前仅为视觉样式；若需筛选，可后续接入脚本或替换为真实路由。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>如何离线使用？</dt>
+          <dd>可移除 Google Fonts 的 link，页面将使用系统字体，其余内容均可离线打开。</dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="note-block">
+      <p><strong>测试说明：</strong>本页刻意增加多个区块（双商品区、服务条、FAQ、长脚注），以便在 13–15 寸笔记本默认窗口高度下出现明显的纵向滚动条。</p>
+      <p>若需继续加长页面，可复制其中任一 <code style="color:var(--accent);font-size:0.85em;">.grid</code> 区块或追加更多 <code style="color:var(--accent);font-size:0.85em;">.faq-item</code> 即可。</p>
+    </div>
+
+    <footer>
+      <div class="links">
+        <a href="#section-hot">回到本周推荐</a>
+        <a href="#section-more">跳到更多精选</a>
+        <a href="#heading-faq">常见问题</a>
+      </div>
+      <p>本地打开本文件即可预览 · 商品与价格均为虚构</p>
+      <p style="margin-top:0.75rem;max-width:48rem;margin-left:auto;margin-right:auto;">
+        © 测试页 · 文件夹：<code style="color:var(--muted);font-size:0.9em;">fangshi-stuff/product-gallery-test/</code>
+      </p>
+    </footer>
+  </div>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>
